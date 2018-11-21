@@ -1,0 +1,29 @@
+{
+  "name": "mefa",
+  "version": "1.0.0",
+  "description": "A meta framework for micro frontend",
+  "main": "index.js",
+  "scripts": {
+    "lint":  "tslint -t codeFrame 'src/**/*.ts'",
+    "build": "tsc src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brandonxiang/mefa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brandonxiang/mefa/issues"
+  },
+  "homepage": "https://github.com/brandonxiang/mefa#readme",
+  "devDependencies": {
+    "rollup": "^0.67.3",
+    "rollup-plugin-typescript2": "^0.18.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-standard": "^7.0.0"
+  }
+}
