@@ -1,0 +1,13 @@
+{
+  "name": "preact-subsystem",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "poi dev",
+    "build": "poi build"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
+}
