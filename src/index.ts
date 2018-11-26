@@ -1,7 +1,5 @@
-import { IIframe } from './model/IIframe'
-
 export default class Mefa {
-    frame: IIframe;
+    frame: any;
     subSystems: object;
     currentApp: string;
     currentRoute: string;

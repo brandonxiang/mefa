@@ -2,10 +2,14 @@
   "name": "mefa",
   "version": "1.0.0",
   "description": "A meta framework for micro frontend",
-  "main": "index.js",
+  "main": "dist/mefa.js",
+  "umd:main": "dist/mefa.umd.js",
+  "module": "dist/mefa.mjs",
+  "source": "src/index.ts",
   "scripts": {
-    "lint":  "tslint -t codeFrame 'src/**/*.ts'",
-    "build": "tsc src/index"
+    "lint": "tslint -t codeFrame 'src/**/*.ts'",
+    "dev": "microbundle watch",
+    "build": "microbundle"
   },
   "repository": {
     "type": "git",
@@ -19,10 +23,8 @@
   },
   "homepage": "https://github.com/brandonxiang/mefa#readme",
   "devDependencies": {
-    "rollup": "^0.67.3",
-    "rollup-plugin-typescript2": "^0.18.0",
+    "microbundle": "^0.7.0",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6",
     "tslint-config-prettier": "^1.1.0",
     "tslint-config-standard": "^7.0.0"
   }
