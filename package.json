@@ -1,6 +1,6 @@
 {
   "name": "mefa",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A meta framework for micro frontend",
   "main": "dist/mefa.js",
   "umd:main": "dist/mefa.umd.js",
@@ -9,7 +9,8 @@
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts'",
     "dev": "microbundle watch",
-    "build": "microbundle"
+    "build": "microbundle",
+    "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
