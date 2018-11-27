@@ -1,0 +1,13 @@
+{
+  "name": "sub-vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "scripts": {
+    "dev": "poi dev",
+    "build": "poi build"
+  }
+}
