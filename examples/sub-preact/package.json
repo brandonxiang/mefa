@@ -1,10 +1,16 @@
 {
-  "name": "react-subsystem",
+  "name": "sub-preact",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "dependencies": {
+    "preact": "^8.3.1"
+  },
   "scripts": {
     "dev": "poi dev",
     "build": "poi build"
+  },
+  "poi": {
+    "port": 4002
   }
 }

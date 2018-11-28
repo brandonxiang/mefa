@@ -1,2 +1,84 @@
-var t=function(){function t(t){this.frame=t,this.subSystems={},this.currentApp="",this.currentRoute=""}return t.prototype.registerApplication=function(t){var e=t.app,s=t.route,i=t.link;if(e&&s&&i)if(this.currentRoute||(this.currentRoute=s),this.currentApp||(this.currentApp=e,this.frame.src=i),this.checkDuplicatedApp(e)){if(!this.checkDuplicatedRoute(e,s)){this.subSystems[e].route.push(s)}}else this.subSystems[e]={link:i,route:[s]}},t.prototype.navigateTo=function(t){var e=t.app,s=t.route;this.isInSameSystem(e)?this.isInSamePage(e,s)||(this.navigateInSystem(e,s),this.updateApp(e,s)):(this.navigateOutSystem(e),this.updateApp(e,s))},t.prototype.checkDuplicatedApp=function(t){return this.subSystems.hasOwnProperty(t)},t.prototype.checkDuplicatedRoute=function(t,e){return this.subSystems[t].route.indexOf(e)>-1},t.prototype.navigateInSystem=function(t,e){this.frame.contentWindow.postMessage({route:e},"*")},t.prototype.navigateOutSystem=function(t){this.frame.src=this.subSystems[t].link},t.prototype.isInSameSystem=function(t){return this.currentApp&&this.currentApp===t},t.prototype.isInSamePage=function(t,e){return this.isInSameSystem(t)&&this.currentRoute&&this.currentRoute===e},t.prototype.updateApp=function(t,e){this.currentApp=t,this.currentRoute=e},t.onRouteUpdate=function(t){window.addEventListener("message",function(e){e.data&&t(e.data.route)})},t}();module.exports=t;
-//# sourceMappingURL=mefa.js.map
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.mefa = factory());
+}(this, (function () { 'use strict';
+
+  var Mefa = /** @class */ (function () {
+      function Mefa(frame) {
+          // 设置frame
+          this.frame = frame;
+          this.subSystems = {};
+          this.currentApp = '';
+          this.currentRoute = '';
+      }
+      Mefa.prototype.registerApplication = function (_a) {
+          var app = _a.app, route = _a.route, link = _a.link;
+          if (!app || !route || !link)
+              return;
+          if (!this.currentRoute)
+              this.currentRoute = route;
+          if (!this.currentApp) {
+              this.currentApp = app;
+              this.frame.src = link;
+          }
+          // TODO: 去重复系统和路由
+          if (!this.checkDuplicatedApp(app)) {
+              this.subSystems[app] = { link: link, route: [route] };
+          }
+          else if (!this.checkDuplicatedRoute(app, route)) {
+              var oldRoute = this.subSystems[app].route;
+              oldRoute.push(route);
+          }
+      };
+      Mefa.prototype.navigateTo = function (_a) {
+          var app = _a.app, route = _a.route;
+          if (this.isInSameSystem(app)) {
+              if (!this.isInSamePage(app, route)) {
+                  this.navigateInSystem(app, route);
+                  this.updateApp(app, route);
+              }
+          }
+          else {
+              this.navigateOutSystem(app);
+              this.updateApp(app, route);
+          }
+      };
+      Mefa.prototype.checkDuplicatedApp = function (app) {
+          // true 为重复app
+          return this.subSystems.hasOwnProperty(app);
+      };
+      Mefa.prototype.checkDuplicatedRoute = function (app, route) {
+          // true 为重复route
+          return (this.subSystems[app].route.indexOf(route) > -1);
+      };
+      Mefa.prototype.navigateInSystem = function (system, name) {
+          this.frame.contentWindow.postMessage({ route: name }, '*');
+      };
+      Mefa.prototype.navigateOutSystem = function (system) {
+          var link = this.subSystems[system].link;
+          this.frame.src = link;
+      };
+      Mefa.prototype.isInSameSystem = function (system) {
+          return this.currentApp && this.currentApp === system;
+      };
+      Mefa.prototype.isInSamePage = function (system, page) {
+          return this.isInSameSystem(system) && this.currentRoute && this.currentRoute === page;
+      };
+      Mefa.prototype.updateApp = function (system, page) {
+          this.currentApp = system;
+          this.currentRoute = page;
+      };
+      Mefa.onRouteUpdate = function (cb) {
+          window.addEventListener('message', function (res) {
+              if (res.data) {
+                  cb(res.data.route);
+              }
+          });
+      };
+      return Mefa;
+  }());
+
+  return Mefa;
+
+})));

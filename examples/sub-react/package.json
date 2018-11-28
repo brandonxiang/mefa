@@ -1,13 +1,17 @@
 {
-  "name": "preact-subsystem",
+  "name": "sub-react",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
   "scripts": {
     "dev": "poi dev",
     "build": "poi build"
   },
-  "dependencies": {
-    "vue": "^2.5.17"
+  "poi": {
+    "port": 4003
   }
 }
