@@ -36,7 +36,7 @@ class Clock extends Component {
           <PageTwo path="/1" />
         </Router>
     </div>
-	);
+    );
   }
 }
 
