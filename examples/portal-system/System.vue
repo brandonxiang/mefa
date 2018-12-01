@@ -18,13 +18,13 @@ export default {
   data() {
     return {
       list: [
-        { name: 'System 1 Page 1', app: 1, route: 1 },
-        { name: 'System 1 Page 2', app: 1, route: 2 },
-        { name: 'System 2 Page 1', app: 2, route: 1 },
-        { name: 'System 2 Page 2', app: 2, route: 2 },
-        { name: 'System 2 Page 3', app: 2, route: 3 },
-        { name: 'System 3 Page 1', app: 3, route: 1 },
-        { name: 'System 3 Page 2', app: 3, route: 2 },
+        { name: 'System 1 Page 1', app: '1', route: '/' },
+        { name: 'System 1 Page 2', app: '1', route: '/1' },
+        { name: 'System 2 Page 1', app: '2', route: '/' },
+        { name: 'System 2 Page 2', app: '2', route: '/1' },
+        { name: 'System 2 Page 3', app: '2', route: '/2' },
+        { name: 'System 3 Page 1', app: '3', route: '/' },
+        { name: 'System 3 Page 2', app: '3', route: '/1' },
       ]
     };
   },
@@ -42,7 +42,7 @@ export default {
 
   methods: {
     goto({ app, route }) {
-
+      this.mefa.navigateTo({app, route})
     }
   }
   

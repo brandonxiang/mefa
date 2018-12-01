@@ -1,5 +1,6 @@
 import { h, render, Component } from 'preact';
-import Router from 'preact-router';
+import Router, { route } from 'preact-router';
+import Mefa from '../../dist/mefa.es';
 
 const PageOne = () => <h1>System 1 Page 1</h1>;
 
@@ -42,3 +43,7 @@ class Clock extends Component {
 
 // render an instance of Clock into <body>:
 render(<Clock />, document.body);
+
+Mefa.onRouteUpdate((path) => {
+  route( path );
+});
