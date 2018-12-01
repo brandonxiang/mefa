@@ -1,4 +1,9 @@
 import { h, render, Component } from 'preact';
+import Router from 'preact-router';
+
+const PageOne = () => <h1>Page 1</h1>;
+
+const PageTwo = () => <h2>Page 2</h2>;
 
 class Clock extends Component {
   constructor() {
@@ -23,7 +28,15 @@ class Clock extends Component {
 
   render(props, state) {
     const time = new Date(state.time).toLocaleTimeString();
-    return <span>{ time }</span>;
+    return (
+      <div>
+        <span>{ time }</span>
+        <Router>
+          <PageOne path="/1" />
+          <PageTwo path="/2" />
+        </Router>
+    </div>
+	);
   }
 }
 

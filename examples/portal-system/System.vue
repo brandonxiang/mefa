@@ -6,12 +6,12 @@
       </ul>
     </div>
     <main class="main">
-      <iframe src="https://baidu.com"></iframe>
+      <iframe ref="subsystem"></iframe>
     </main>
   </div>
 </template>
 <script>
-
+import Mefa from '../../dist/mefa.es.js'
 
 export default {
 
@@ -27,6 +27,11 @@ export default {
         { name: 'System 3 Page 2', app: 3, route: 2 },
       ]
     };
+  },
+
+  mounted() {
+    this.mefa = new Mefa(this.$refs.subsystem)
+    this.mefa.registerApplication({app: '1', route: '/1', link: 'http://localhost:4002/'})
   },
 
   methods: {
@@ -62,6 +67,7 @@ ul,li {
   background-color: #fff;
   padding: 10px 20px;
   margin: 20px 30px;
+  cursor: pointer;
 }
 .main {
   flex: 1;
