@@ -1,9 +1,9 @@
 import { h, render, Component } from 'preact';
 import Router from 'preact-router';
 
-const PageOne = () => <h1>Page 1</h1>;
+const PageOne = () => <h1>System 1 Page 1</h1>;
 
-const PageTwo = () => <h2>Page 2</h2>;
+const PageTwo = () => <h1>System 2 Page 2</h1>;
 
 class Clock extends Component {
   constructor() {
@@ -30,10 +30,10 @@ class Clock extends Component {
     const time = new Date(state.time).toLocaleTimeString();
     return (
       <div>
-        <span>{ time }</span>
+        <span>Powered by Preact { time }</span>
         <Router>
-          <PageOne path="/1" />
-          <PageTwo path="/2" />
+          <PageOne path="/" />
+          <PageTwo path="/1" />
         </Router>
     </div>
 	);

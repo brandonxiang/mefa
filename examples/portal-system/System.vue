@@ -31,7 +31,13 @@ export default {
 
   mounted() {
     this.mefa = new Mefa(this.$refs.subsystem)
+    this.mefa.registerApplication({app: '1', route: '/', link: 'http://localhost:4002/'})
     this.mefa.registerApplication({app: '1', route: '/1', link: 'http://localhost:4002/'})
+    this.mefa.registerApplication({app: '2', route: '/', link: 'http://localhost:4003/'})
+    this.mefa.registerApplication({app: '2', route: '/1', link: 'http://localhost:4003/'})
+    this.mefa.registerApplication({app: '2', route: '/2', link: 'http://localhost:4003/'})
+    this.mefa.registerApplication({app: '3', route: '/', link: 'http://localhost:4004/'})
+    this.mefa.registerApplication({app: '3', route: '/1', link: 'http://localhost:4004/'})
   },
 
   methods: {
