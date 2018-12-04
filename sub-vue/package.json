@@ -1,0 +1,17 @@
+{
+  "name": "sub-vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2"
+  },
+  "scripts": {
+    "dev": "poi dev",
+    "build": "poi build"
+  },
+  "poi": {
+    "port": 4004
+  }
+}
