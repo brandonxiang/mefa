@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import Mefa from '../../dist/mefa.es.js'
+import Mefa from '../mefa.es.js'
 
 export default {
 

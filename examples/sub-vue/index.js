@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Mefa from '../../dist/mefa.es';
+import Mefa from '../mefa.es';
 
 const PageOne = {
   render(h) {

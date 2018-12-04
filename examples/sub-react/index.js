@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import Mefa from '../../dist/mefa.es';
+import Mefa from '../mefa.es';
 
 
 class Control extends Component {

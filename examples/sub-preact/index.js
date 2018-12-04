@@ -1,6 +1,6 @@
 import { h, render, Component } from 'preact';
 import Router, { route } from 'preact-router';
-import Mefa from '../../dist/mefa.es';
+import Mefa from '../mefa.es';
 
 const PageOne = () => <h1>System 1 Page 1</h1>;
 

@@ -2,21 +2,22 @@
   "name": "mefa",
   "version": "0.0.1",
   "description": "A meta framework for micro frontend",
-  "main": "dist/mefa.js",
-  "umd:main": "dist/mefa.umd.js",
-  "module": "dist/mefa.mjs",
+  "main": "dist/mefa.min.js",
+  "module": "dist/mefa.es.js",
   "source": "src/index.ts",
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts'",
     "build": "bili src/index.ts --format umd,cjs,es,umd-min --module-name mefa",
-    "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
+    "pre-gh": "bili src/index.ts --format es --outDir examples",
+    "gh": "npm run pre-gh && gh-pages -d examples"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/brandonxiang/mefa.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["microfrontend", "meta", "iframe"],
+  "author": "brandonX",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/brandonxiang/mefa/issues"
@@ -31,6 +32,7 @@
     "tslint-config-standard": "^7.0.0"
   },
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "typescript": "^3.1.6"
   }
 }
