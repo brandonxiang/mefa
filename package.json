@@ -1,6 +1,6 @@
 {
   "name": "mefa",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A meta framework for micro frontend",
   "main": "dist/mefa.min.js",
   "module": "dist/mefa.es.js",

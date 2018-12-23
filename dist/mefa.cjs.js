@@ -25,18 +25,18 @@ var error = function (message) {
 
 var Mefa = /** @class */ (function () {
     function Mefa(frame) {
-        // 设置frame
-        this.frame = frame;
         this.subSystems = {};
         this.currentApp = '';
         this.currentRoute = '';
+        // 设置frame
+        this.frame = frame;
     }
     Mefa.prototype.registerApplication = function (_a) {
         var app = _a.app, route = _a.route, link = _a.link;
         if (!this.frame)
             error('Initailization Error!');
         if (!app || !link)
-            error('Parameters "app" and "link" are required');
+            error('Parameters "app" and "link" are required!');
         if (!this.currentApp) {
             if (!this.currentRoute)
                 this.currentRoute = route;
@@ -56,6 +56,8 @@ var Mefa = /** @class */ (function () {
     };
     Mefa.prototype.navigateTo = function (_a) {
         var app = _a.app, route = _a.route;
+        if (!app)
+            error('Parameter "app" is required!');
         if (this.isInSameSystem(app)) {
             if (!this.isInSamePage(app, route)) {
                 this.navigateInSystem(route);
