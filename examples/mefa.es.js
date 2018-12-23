@@ -1,5 +1,17 @@
 var ROUTECHANGE = 'ROUTECHANGE';
 
+var onRouteUpdate = function (cb) {
+    window.addEventListener('message', function (res) {
+        if (res.data && res.data.message === ROUTECHANGE) {
+            cb(res.data.route);
+        }
+    });
+};
+
+var index = /*#__PURE__*/Object.freeze({
+  onRouteUpdate: onRouteUpdate
+});
+
 var Mefa = /** @class */ (function () {
     function Mefa(frame) {
         // 设置frame
@@ -50,8 +62,8 @@ var Mefa = /** @class */ (function () {
     };
     Mefa.prototype.navigateInSystem = function (route) {
         var params = {
-            route: route,
             message: ROUTECHANGE,
+            route: route,
         };
         this.frame.contentWindow.postMessage(params, '*');
     };
@@ -71,17 +83,5 @@ var Mefa = /** @class */ (function () {
     };
     return Mefa;
 }());
-
-var onRouteUpdate = function (cb) {
-    window.addEventListener('message', function (res) {
-        if (res.data) {
-            cb(res.data.route);
-        }
-    });
-};
-
-var index = /*#__PURE__*/Object.freeze({
-  onRouteUpdate: onRouteUpdate
-});
 
 export { Mefa, index as appMefa };

@@ -6,7 +6,7 @@
   "module": "dist/mefa.es.js",
   "source": "src/index.ts",
   "scripts": {
-    "lint": "tslint -t codeFrame 'src/**/*.ts'",
+    "lint": "tslint --init",
     "build": "bili src/index.ts --format umd,cjs,es,umd-min --module-name Mefa",
     "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
     "pre-gh": "bili src/index.ts --format es --outDir examples",

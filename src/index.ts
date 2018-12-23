@@ -1,7 +1,7 @@
-import Mefa from './mefa'
-import * as appMefa from './appMefa'
+import * as appMefa from './appMefa';
+import Mefa from './mefa';
 
 export {
   Mefa,
   appMefa,
-}
+};
