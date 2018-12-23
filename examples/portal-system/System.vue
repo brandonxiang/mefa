@@ -25,7 +25,8 @@ export default {
         { name: 'System 2 Page 3', app: '2', route: '/2' },
         { name: 'System 3 Page 1', app: '3', route: '/' },
         { name: 'System 3 Page 2', app: '3', route: '/1' },
-        
+        { name: 'baidu', app: 'baidu' },
+
       ]
     };
   },
@@ -39,7 +40,7 @@ export default {
     this.mefa.registerApplication({app: '2', route: '/2', link: 'http://localhost:4003/'})
     this.mefa.registerApplication({app: '3', route: '/', link: 'http://localhost:4004/'})
     this.mefa.registerApplication({app: '3', route: '/1', link: 'http://localhost:4004/'})
-    this.mefa.registerApplication({link: 'http://baidu.com/'})
+    this.mefa.registerApplication({app: 'baidu', link: 'http://baidu.com/'})
   },
 
   methods: {

@@ -1,37 +1,45 @@
 import * as constant from '../utils/constant';
+import * as logger from '../utils/logger';
 
 class Mefa {
   private frame: any;
-  private subSystems: object;
-  private currentApp: string;
-  private currentRoute: string;
+  private subSystems: object = {};
+  private currentApp: string = '';
+  private currentRoute: string = '';
 
-  constructor(frame) {
+  constructor(frame: any) {
       // 设置frame
     this.frame = frame;
-    this.subSystems = {};
-    this.currentApp = '';
-    this.currentRoute = '';
   }
 
   public registerApplication({ app, route, link }): void {
-    if (!app || !route || !link) return;
+    if (!this.frame) logger.error('Initailization Error!');
+    if (!app || !link) logger.error('Parameters "app" and "link" are required!');
 
-    if (!this.currentRoute) this.currentRoute = route;
     if (!this.currentApp) {
+      if (!this.currentRoute) this.currentRoute = route;
       this.currentApp = app;
       this.frame.src = link;
     }
-      // TODO: 去重复系统和路由
+
+    // TODO: 去重复系统和路由
     if (!this.checkDuplicatedApp(app)) {
-      this.subSystems[app] = { link, route: [route] };
+
+      this.subSystems[app] = route ?
+                             { link, route: [route] } :
+                             { link, route: [] };
+
     } else if (!this.checkDuplicatedRoute(app, route)) {
+
       const oldRoute = this.subSystems[app].route;
       oldRoute.push(route);
+
     }
   }
 
   public navigateTo({ app, route }) {
+    if (!app) logger.error('Parameter "app" is required!');
+
     if (this.isInSameSystem(app)) {
       if (!this.isInSamePage(app, route)) {
         this.navigateInSystem(route);
@@ -50,7 +58,10 @@ class Mefa {
 
   public checkDuplicatedRoute(app: string, route: string): boolean {
       // true 为重复route
-    return (this.subSystems[app].route.indexOf(route) > -1);
+    if (route) {
+      return (this.subSystems[app].route.indexOf(route) > -1);
+    }
+    return true;
   }
 
   private navigateInSystem(route: string): void {

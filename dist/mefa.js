@@ -18,6 +18,13 @@
     onRouteUpdate: onRouteUpdate
   });
 
+  var error = function (message) {
+      console.error(message);
+      throw new Error(message);
+  };
+  // export const warn = (message: string) => {
+  // };
+
   var Mefa = /** @class */ (function () {
       function Mefa(frame) {
           // 设置frame
@@ -28,17 +35,21 @@
       }
       Mefa.prototype.registerApplication = function (_a) {
           var app = _a.app, route = _a.route, link = _a.link;
-          if (!app || !route || !link)
-              return;
-          if (!this.currentRoute)
-              this.currentRoute = route;
+          if (!this.frame)
+              error('Initailization Error!');
+          if (!app || !link)
+              error('Parameters "app" and "link" are required');
           if (!this.currentApp) {
+              if (!this.currentRoute)
+                  this.currentRoute = route;
               this.currentApp = app;
               this.frame.src = link;
           }
           // TODO: 去重复系统和路由
           if (!this.checkDuplicatedApp(app)) {
-              this.subSystems[app] = { link: link, route: [route] };
+              this.subSystems[app] = route ?
+                  { link: link, route: [route] } :
+                  { link: link, route: [] };
           }
           else if (!this.checkDuplicatedRoute(app, route)) {
               var oldRoute = this.subSystems[app].route;
@@ -54,7 +65,7 @@
               }
           }
           else {
-              this.navigateOutSystem(app);
+              this.navigateOutSystem(app, route);
               this.updateApp(app, route);
           }
       };
@@ -64,7 +75,10 @@
       };
       Mefa.prototype.checkDuplicatedRoute = function (app, route) {
           // true 为重复route
-          return (this.subSystems[app].route.indexOf(route) > -1);
+          if (route) {
+              return (this.subSystems[app].route.indexOf(route) > -1);
+          }
+          return true;
       };
       Mefa.prototype.navigateInSystem = function (route) {
           var params = {
@@ -73,7 +87,8 @@
           };
           this.frame.contentWindow.postMessage(params, '*');
       };
-      Mefa.prototype.navigateOutSystem = function (system) {
+      Mefa.prototype.navigateOutSystem = function (system, route) {
+          // TODO：跳转指定路由
           var link = this.subSystems[system].link;
           this.frame.src = link;
       };
