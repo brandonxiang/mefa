@@ -1,3 +1,5 @@
+var ROUTECHANGE = 'ROUTECHANGE';
+
 var Mefa = /** @class */ (function () {
     function Mefa(frame) {
         // 设置frame
@@ -29,7 +31,7 @@ var Mefa = /** @class */ (function () {
         var app = _a.app, route = _a.route;
         if (this.isInSameSystem(app)) {
             if (!this.isInSamePage(app, route)) {
-                this.navigateInSystem(app, route);
+                this.navigateInSystem(route);
                 this.updateApp(app, route);
             }
         }
@@ -46,8 +48,12 @@ var Mefa = /** @class */ (function () {
         // true 为重复route
         return (this.subSystems[app].route.indexOf(route) > -1);
     };
-    Mefa.prototype.navigateInSystem = function (system, name) {
-        this.frame.contentWindow.postMessage({ route: name }, '*');
+    Mefa.prototype.navigateInSystem = function (route) {
+        var params = {
+            route: route,
+            message: ROUTECHANGE,
+        };
+        this.frame.contentWindow.postMessage(params, '*');
     };
     Mefa.prototype.navigateOutSystem = function (system) {
         var link = this.subSystems[system].link;
@@ -63,14 +69,19 @@ var Mefa = /** @class */ (function () {
         this.currentApp = system;
         this.currentRoute = page;
     };
-    Mefa.onRouteUpdate = function (cb) {
-        window.addEventListener('message', function (res) {
-            if (res.data) {
-                cb(res.data.route);
-            }
-        });
-    };
     return Mefa;
 }());
 
-export default Mefa;
+var onRouteUpdate = function (cb) {
+    window.addEventListener('message', function (res) {
+        if (res.data) {
+            cb(res.data.route);
+        }
+    });
+};
+
+var index = /*#__PURE__*/Object.freeze({
+  onRouteUpdate: onRouteUpdate
+});
+
+export { Mefa, index as appMefa };

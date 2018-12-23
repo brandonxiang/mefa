@@ -7,7 +7,7 @@
   "source": "src/index.ts",
   "scripts": {
     "lint": "tslint -t codeFrame 'src/**/*.ts'",
-    "build": "bili src/index.ts --format umd,cjs,es,umd-min --module-name mefa",
+    "build": "bili src/index.ts --format umd,cjs,es,umd-min --module-name Mefa",
     "release": "npm t && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish",
     "pre-gh": "bili src/index.ts --format es --outDir examples",
     "gh": "npm run pre-gh && gh-pages -d examples"
@@ -16,7 +16,11 @@
     "type": "git",
     "url": "git+https://github.com/brandonxiang/mefa.git"
   },
-  "keywords": ["microfrontend", "meta", "iframe"],
+  "keywords": [
+    "microfrontend",
+    "meta",
+    "iframe"
+  ],
   "author": "brandonX",
   "license": "MIT",
   "bugs": {
@@ -28,6 +32,7 @@
     "jest": "^23.6.0",
     "rollup-plugin-typescript2": "^0.18.0",
     "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.1.0",
     "tslint-config-standard": "^7.0.0"
   },

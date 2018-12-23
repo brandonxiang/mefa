@@ -1,8 +1,10 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.mefa = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.Mefa = {})));
+}(this, (function (exports) { 'use strict';
+
+  var ROUTECHANGE = 'ROUTECHANGE';
 
   var Mefa = /** @class */ (function () {
       function Mefa(frame) {
@@ -35,7 +37,7 @@
           var app = _a.app, route = _a.route;
           if (this.isInSameSystem(app)) {
               if (!this.isInSamePage(app, route)) {
-                  this.navigateInSystem(app, route);
+                  this.navigateInSystem(route);
                   this.updateApp(app, route);
               }
           }
@@ -52,8 +54,12 @@
           // true 为重复route
           return (this.subSystems[app].route.indexOf(route) > -1);
       };
-      Mefa.prototype.navigateInSystem = function (system, name) {
-          this.frame.contentWindow.postMessage({ route: name }, '*');
+      Mefa.prototype.navigateInSystem = function (route) {
+          var params = {
+              route: route,
+              message: ROUTECHANGE,
+          };
+          this.frame.contentWindow.postMessage(params, '*');
       };
       Mefa.prototype.navigateOutSystem = function (system) {
           var link = this.subSystems[system].link;
@@ -69,16 +75,24 @@
           this.currentApp = system;
           this.currentRoute = page;
       };
-      Mefa.onRouteUpdate = function (cb) {
-          window.addEventListener('message', function (res) {
-              if (res.data) {
-                  cb(res.data.route);
-              }
-          });
-      };
       return Mefa;
   }());
 
-  return Mefa;
+  var onRouteUpdate = function (cb) {
+      window.addEventListener('message', function (res) {
+          if (res.data) {
+              cb(res.data.route);
+          }
+      });
+  };
+
+  var index = /*#__PURE__*/Object.freeze({
+    onRouteUpdate: onRouteUpdate
+  });
+
+  exports.Mefa = Mefa;
+  exports.appMefa = index;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

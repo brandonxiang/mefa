@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Mefa from '../mefa.es';
+import {appMefa} from '../mefa.es';
 
 const PageOne = {
   render(h) {
@@ -38,6 +38,6 @@ new Vue({
 });
 
 
-Mefa.onRouteUpdate((route) => {
+appMefa.onRouteUpdate((route) => {
   router.push({ path: route });
 });

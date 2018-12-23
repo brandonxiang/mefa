@@ -13,7 +13,7 @@ import { mefa } from 'mefa'
 #### SubSystem
 
 ```javascript
-import { subMefa } from 'subMefa' 
+import { appMefa } from 'subMefa' 
 ```
 
 

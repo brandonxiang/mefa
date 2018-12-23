@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import Mefa from '../mefa.es';
+import { appMefa } from '../mefa.es';
 
 
 class Control extends Component {
@@ -10,7 +10,7 @@ class Control extends Component {
   }
 
   componentDidMount() {
-    Mefa.onRouteUpdate((route) => {
+    appMefa.onRouteUpdate((route) => {
       this.props.history.push(route);
     });
   }
