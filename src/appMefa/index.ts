@@ -7,3 +7,7 @@ export const onRouteUpdate = (cb): void => {
     }
   });
 };
+
+// export const emitLoginTimeout = (cb) => {
+//   window.parent.postMessage()
+// }

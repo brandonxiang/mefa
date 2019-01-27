@@ -1,6 +1,6 @@
 # mefa (Developing)
 
-A meta framework for micro-frontend, which is inspired by [Mooa]() and [Single-SPA]().
+A meta framework for micro-frontend, which is inspired by [Mooa](https://github.com/phodal/mooa) and [Single-SPA](https://github.com/CanopyTax/single-spa).
 
 ## Usage
 
@@ -8,12 +8,28 @@ A meta framework for micro-frontend, which is inspired by [Mooa]() and [Single-S
 
 ```javascript
 import { mefa } from 'mefa'
+
+// use Iframe Object to initailize 
+this.mefa = new Mefa(this.$refs.subsystem)
+// register you sub application 
+this.mefa.registerApplication({app: '1', route: '/', link: 'http://localhost:4002/'})
+
+```
+
+```javascript
+// trigger your sub application to change
+this.mefa.navigateTo({app, route})
 ```
 
 #### SubSystem
 
 ```javascript
 import { appMefa } from 'subMefa' 
+
+// listen the command for routeupdate
+appMefa.onRouteUpdate((path) => {
+  route( path );
+});
 ```
 
 
